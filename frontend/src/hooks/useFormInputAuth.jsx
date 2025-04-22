@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { API_REGISTER } from '../../config'
+import { API_LOGIN, API_REGISTER } from '../../config'
 import { useNavigate } from 'react-router-dom'
 
 const useFormInputAuth = () => {
@@ -17,6 +17,8 @@ const useFormInputAuth = () => {
 
       const handleSubmitLogin = (e) => {
             e.preventDefault()
+            axios.post(API_LOGIN, {username, password}, {withCredentials: true})
+            navigate('/login')
       }
 
       return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }
