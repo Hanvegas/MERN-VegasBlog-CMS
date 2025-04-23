@@ -8,7 +8,7 @@ const MainLayout = () => {
                   <header>
                         <Navbar />
                   </header>
-                  <main className='p-3'>
+                  <main className='relative p-3'>
                         <Outlet />
                   </main>
             </>
