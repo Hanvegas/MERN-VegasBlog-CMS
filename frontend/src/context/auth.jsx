@@ -8,15 +8,23 @@ export const AuthProvider = ({ children }) => {
       const [user, setUser] = useState(null)
 
       useEffect(() => {
-            axiosInstance.get("/check-auth")
-                  .then((res) => {
-                        setIsLoggedIn(res.data.authenticated)
-                        setUser(res.data.user)
-                  })
-                  .catch(() => {
-                        setIsLoggedIn(res.data.authenticated)
+            const checkData = async() => {
+                  try {
+                        const res = await axiosInstance.get('/check-auth')
+                        if (res.data.authenticated) {
+                              setIsLoggedIn(true)
+                              setUser(res.data.user)
+                        } else {
+                              setIsLoggedIn(false)
+                              setUser(null)
+                        }
+                  } catch (error) {
+                        setIsLoggedIn(false)
                         setUser(null)
-                  })
+                  }
+            }
+
+            checkData()
       }, [])
 
       return (

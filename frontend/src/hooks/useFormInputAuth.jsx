@@ -10,25 +10,29 @@ const useFormInputAuth = () => {
       const [email, setEmail] = useState("")
       const [password, setPassword] = useState("")
 
-      const handleSubmitRegister = (e) => {
-            e.preventDefault()
-            axiosInstance.post('/register', { username, email, password })
-            navigate('/login')
+      const handleSubmitRegister = async (e) => {
+            try {
+                  e.preventDefault()
+                  await axiosInstance.post('/register', { username, email, password })
+                  navigate('/login')
+            } catch (error) {
+                  navigate('/register')
+            }
       }
 
-      const handleSubmitLogin = (e) => {
-            e.preventDefault()
-            axiosInstance.post('/login', { username, password })
-                  .then(() => {
-                        setIsLoggedIn(true)
-                        navigate('/')
-                  }).catch(() => {
-                        setIsLoggedIn(false)
-                        navigate('/login')
-                  })
+      const handleSubmitLogin = async (e) => {
+            try {
+                  e.preventDefault()
+                  await axiosInstance.post('/login', { username, password })
+                  setIsLoggedIn(true)
+                  navigate('/')
+            } catch (error) {
+                  setIsLoggedIn(false)
+                  navigate('/login')
+            }
       }
 
-      return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }
+return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }
 }
 
 export default useFormInputAuth
