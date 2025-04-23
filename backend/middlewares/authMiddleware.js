@@ -1,16 +1,15 @@
 const jwt = require('jsonwebtoken')
 
 const authMiddleware = (req, res, next) => {
-      const token = req.cookies.token
-      if (!token) {
-            res.redirect('/login')
-            return res.status(401).json({msg: "Not Authenticated"})
-      }
-
-      jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-            if (err) return res.status(401).json({ msg: "Invalid Token" })
+      try {
+            const token = req.cookies.token
+            if (!token) return res.json({ authenticated: false, msg: "Not Authenticated" })
+            const user = jwt.verify(token, process.env.JWT_SECRET)
+            req.user = user
             next()
-      })
+      } catch (error) {
+            return res.status(401).json({ authenticated: false, msg: "Invalid Credentials" })
+      }
 }
 
-module.export = authMiddleware
+module.exports = authMiddleware

@@ -1,9 +1,10 @@
-import React, { useState } from 'react'
-import axios from 'axios'
-import { API_LOGIN, API_REGISTER } from '../../config'
+import React, { useContext, useState } from 'react'
+import axiosInstance from '../utils/axiosConfig'
 import { useNavigate } from 'react-router-dom'
+import { AuthContext } from '../context/auth'
 
 const useFormInputAuth = () => {
+      const { setIsLoggedIn } = useContext(AuthContext)
       const navigate = useNavigate()
       const [username, setUsername] = useState("")
       const [email, setEmail] = useState("")
@@ -11,14 +12,20 @@ const useFormInputAuth = () => {
 
       const handleSubmitRegister = (e) => {
             e.preventDefault()
-            axios.post(API_REGISTER, {username, email, password})
+            axiosInstance.post('/register', { username, email, password })
             navigate('/login')
       }
 
       const handleSubmitLogin = (e) => {
             e.preventDefault()
-            axios.post(API_LOGIN, {username, password}, {withCredentials: true})
-            navigate('/login')
+            axiosInstance.post('/login', { username, password })
+                  .then(() => {
+                        setIsLoggedIn(true)
+                        navigate('/')
+                  }).catch(() => {
+                        setIsLoggedIn(false)
+                        navigate('/login')
+                  })
       }
 
       return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }

@@ -1,1 +1,27 @@
 @import "tailwindcss";
+
+.loading {
+      width: 48px;
+      height: 48px;
+      border: 5px solid #FFF;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      position: relative;
+      animation: pulse 1s linear infinite;
+}
+
+.loading:after {
+      content: '';
+      position: absolute;
+      width: 48px;
+      height: 48px;
+      border: 5px solid #ff0707;
+      border-radius: 50%;
+      display: inline-block;
+      box-sizing: border-box;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      animation: scaleUp 1s linear infinite;
+}
