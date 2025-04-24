@@ -14,6 +14,10 @@ const blogSchema = new Schema({
       date: {
             type: String,
             required: true
+      },
+      user: {
+            type: Schema.Types.ObjectId,
+            ref: "User"
       }
 })
 
