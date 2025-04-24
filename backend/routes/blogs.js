@@ -12,7 +12,8 @@ router.get("/", authMiddleware, async (req, res) => {
 router.get('/:id', authMiddleware, async (req, res) => {
       const { id } = req.params
       const blog = await Blog.findById(id)
-      res.status(201).json(blog)
+      const user = req.user
+      res.status(201).json({ blog, user })
 })
 
 router.post("/", authMiddleware, async (req, res) => {
@@ -22,6 +23,7 @@ router.post("/", authMiddleware, async (req, res) => {
             const options = { day: '2-digit', month: 'short', year: 'numeric' }
             const formatted = today.toLocaleDateString('en-GB', options)
             const blog = new Blog({ title, description, date: formatted })
+            blog.user = req.user.id
             await blog.save()
             res.status(201).json({ msg: "Data Posted", blog })
       } catch (error) {

@@ -12,7 +12,10 @@ router.post('/register', wrapAsync(async (req, res) => {
       try {
             const { username, email, password } = req.body
             if (!username || !email || !password) return res.status(401).json({ mgs: "Please input field" })
-            const newUser = new User({ username, email, password })
+            const characterName = ["KingSton", "Avery", "Destiny", "Eliza", "Andrea", "Jude", "Liam", "Mason", "Sophia"]
+            const randomCharacter = characterName[Math.floor(Math.random() * characterName.length)]
+            const profilePic = `https://api.dicebear.com/9.x/adventurer/svg?seed=${randomCharacter}`
+            const newUser = new User({ username, email, password, profilePic })
             await newUser.save()
             res.status(201).json({ msg: "Registed Successfully" })
       } catch (error) {
@@ -26,7 +29,7 @@ router.post('/login', wrapAsync(async (req, res) => {
             const user = await User.findOne({ username })
             const isMatch = await bcrypt.compare(password, user.password)
             if (!isMatch) return res.status(401).json({ msg: "Username or Password Wrong" })
-            const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1d" })
+            const token = jwt.sign({ id: user.id, username: user.username, profilePic: user.profilePic }, process.env.JWT_SECRET, { expiresIn: "1d" })
             res.cookie("token", token, {
                   httpOnly: true,
                   secure: false,
