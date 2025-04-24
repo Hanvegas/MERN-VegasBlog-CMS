@@ -4,14 +4,14 @@ import { Outlet } from 'react-router-dom'
 
 const MainLayout = () => {
       return (
-            <>
-                  <header>
+            <div className='relative w-full'>
+                  <header className=' absolute inset-0 w-full max-w-screen-2xl mx-auto'>
                         <Navbar />
                   </header>
-                  <main className='relative p-3'>
+                  <main className='relative p-3 '>
                         <Outlet />
                   </main>
-            </>
+            </div>
       )
 }
 

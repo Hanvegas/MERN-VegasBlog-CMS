@@ -5,7 +5,7 @@ const HeroSection = () => {
             <div className='relative flex flex-col justify-end w-full h-[95vh]'>
                   <img src="../../../public/image/mansion.jpg" alt="" className='w-full h-full object-cover rounded-lg' />
                   <div className='absolute inset-0 bg-gradient-to-t from-black/45 via-transparent  to-black/30 rounded-lg'></div>
-                  <div className='absolute flex justify-between items-end w-full px-8 py-16 text-white'>
+                  <div className='absolute inset-0 flex justify-between items-end max-w-screen-2xl mx-auto w-full px-8 py-20 text-white'>
                         <div>
                               <h2 className='mb-7 text-5xl font-semibold w-3xl'>Exploring the Wonder Landmark</h2>
                               <p className='text-xl line-clamp-2 w-2xl'>An iconic landmarks, this post unveils the secrets that make this destination a traveler's paradise.</p>
