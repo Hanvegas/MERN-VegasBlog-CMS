@@ -1,5 +1,6 @@
-import axiosInstance from "../utils/axiosConfig";
+
 import { createContext, useEffect, useState } from "react";
+import { checkAuth } from "../services/auth";
 
 export const AuthContext = createContext()
 
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
       useEffect(() => {
             const checkData = async() => {
                   try {
-                        const res = await axiosInstance.get('/check-auth')
+                        const res = await checkAuth()
                         if (res.data.authenticated) {
                               setIsLoggedIn(true)
                               setUser(res.data.user)

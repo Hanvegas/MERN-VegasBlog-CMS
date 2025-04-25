@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react'
-import axiosInstance from '../utils/axiosConfig'
+import { login, register } from '../services/auth'
 import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/auth'
 
@@ -13,7 +13,7 @@ const useFormInputAuth = () => {
       const handleSubmitRegister = async (e) => {
             try {
                   e.preventDefault()
-                  await axiosInstance.post('/register', { username, email, password })
+                  await register({ username, email, password })
                   navigate('/login')
             } catch (error) {
                   navigate('/register')
@@ -23,7 +23,7 @@ const useFormInputAuth = () => {
       const handleSubmitLogin = async (e) => {
             try {
                   e.preventDefault()
-                  await axiosInstance.post('/login', { username, password })
+                  await login({ username, password })
                   setIsLoggedIn(true)
                   navigate('/')
             } catch (error) {
@@ -32,7 +32,7 @@ const useFormInputAuth = () => {
             }
       }
 
-return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }
+      return { username, setUsername, email, setEmail, password, setPassword, handleSubmitRegister, handleSubmitLogin }
 }
 
 export default useFormInputAuth
