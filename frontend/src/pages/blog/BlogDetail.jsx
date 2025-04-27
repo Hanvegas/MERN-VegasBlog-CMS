@@ -7,7 +7,6 @@ import useGetBlog from '../../hooks/blog/useGetBlog'
 const BlogDetail = () => {
       const { getDetail } = useGetBlogById()
       const { blogs } = useGetBlog()
-      console.log(getDetail)
 
       const images = ["../../../image/city-light.jpg", "../../image/city-light-2.jpg", '../../image/mansion.jpg']
       const imageRandom = images[Math.floor(Math.random() * images.length)]

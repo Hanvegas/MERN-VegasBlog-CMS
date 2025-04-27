@@ -10,9 +10,13 @@ const useGetBlogById = () => {
             const getDataById = async () => {
                   const res = await getBlogById(id)
                   setGetDetail(res.data)
+                  window.scrollTo({
+                        top: 0,
+                        behavior: 'smooth',
+                  })
             }
             getDataById()
-      }, [])
+      }, [id])
       return { getDetail }
 }
 
