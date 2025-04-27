@@ -5,15 +5,14 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const router = express.Router()
 
 router.get("/", authMiddleware, async (req, res) => {
-      const blogs = await Blog.find()
+      const blogs = await Blog.find().populate('user')
       res.status(201).json(blogs)
 })
 
 router.get('/:id', authMiddleware, async (req, res) => {
       const { id } = req.params
-      const blog = await Blog.findById(id)
-      const user = req.user
-      res.status(201).json({ blog, user })
+      const blog = await Blog.findById(id).populate('user')
+      res.status(201).json(blog)
 })
 
 router.post("/", authMiddleware, async (req, res) => {
