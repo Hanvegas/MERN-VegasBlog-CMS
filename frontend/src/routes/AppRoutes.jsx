@@ -7,6 +7,7 @@ import Login from '../pages/Login'
 import AuthRoute from './AuthRoute'
 import BlogDetail from '../pages/blog/BlogDetail'
 import EditBlog from '../pages/blog/EditBlog'
+import CreateBlog from '../pages/blog/CreateBlog'
 
 const AppRoutes = () => {
       return (
@@ -17,6 +18,7 @@ const AppRoutes = () => {
                   <Route element={<AuthRoute />}>
                         <Route path='/:id' element={<BlogDetail />} />
                         <Route path='/edit/:id' element={<EditBlog />} />
+                        <Route path='/create' element={<CreateBlog />} />
                   </Route>
                   <Route path='/register' element={<Register />} />
                   <Route path='/login' element={<Login />} />

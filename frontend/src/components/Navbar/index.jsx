@@ -21,7 +21,10 @@ const Navbar = () => {
                   <div>
                         {isLoggedIn
                               ?
-                              <button onClick={handleLogout} className='py-2 px-6 font-semibold text-black bg-white rounded-md cursor-pointer'>Log Out</button>
+                              <>
+                                    <Link to={"/create"} className='py-2 px-6 font-semibold text-white border-2 mr-4 rounded-md'>Add New Blog</Link>
+                                    <button onClick={handleLogout} className='py-2 px-6 font-semibold text-black bg-white rounded-md cursor-pointer'>Log Out</button>
+                              </>
                               :
                               <>
                                     <Link to={'/register'} className='py-2 px-6 font-semibold text-white'>Sign Up</Link>

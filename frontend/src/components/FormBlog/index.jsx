@@ -1,8 +1,7 @@
 import React from 'react'
 import useEditBlog from '../../hooks/blog/useEditBlog'
 
-const FormEditBlog = () => {
-      const { title, setTitle, description, setDescription, image, setImage, handleSubmit } = useEditBlog()
+const FormBlog = ({ title, setTitle, description, setDescription, image, setImage, handleSubmit }) => {
       return (
             <form onSubmit={handleSubmit} className='w-full max-w-screen-xl mx-auto rounded-xl shadow-xl p-10'>
                   <div className='mb-12'>
@@ -24,4 +23,4 @@ const FormEditBlog = () => {
       )
 }
 
-export default FormEditBlog
+export default FormBlog
