@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from "react-router-dom"
+import useDeleteBlog from '../../hooks/blog/useDeleteBlog'
 
-const Article = ({ id ,title, description, image, profilePic, username }) => {
+const Article = ({ id, title, description, image, profilePic, username }) => {
+      const { handleDelete } = useDeleteBlog()
       return (
             <div className='w-full'>
                   <h1 className='w-full text-6xl font-semibold leading-20 mb-14'>{title}</h1>
@@ -17,7 +19,7 @@ const Article = ({ id ,title, description, image, profilePic, username }) => {
                   </div>
                   <div className='flex w-full justify-around text-3xl mb-14'>
                         <Link to={`/edit/${id}`} className='py-3 px-6 text-white bg-green-600 rounded-md'>Edit</Link>
-                        <button className='py-3 px-6 text-white bg-red-600 rounded-md'>Delete</button>
+                        <button onClick={handleDelete} className='py-3 px-6 text-white bg-red-600 rounded-md cursor-pointer'>Delete</button>
                   </div>
                   <div className='border-b-2 mb-16'></div>
             </div>
