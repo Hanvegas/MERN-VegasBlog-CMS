@@ -53,4 +53,13 @@ router.get('/check-auth', (req, res) => {
       }
 })
 
+router.post('/logout', (req, res) => {
+      try {
+            res.clearCookie('token', { httpOnly: true, secure: false, sameSite: "strict" })
+            res.status(201).json({ msg: "Logout Successfully" })
+      } catch (error) {
+            res.status(401).json({ msg: "Logout Failed"})
+      }
+})
+
 module.exports = router

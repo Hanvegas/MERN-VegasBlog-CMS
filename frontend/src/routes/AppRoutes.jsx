@@ -11,12 +11,12 @@ import EditBlog from '../pages/blog/EditBlog'
 const AppRoutes = () => {
       return (
             <Routes>
+                  <Route element={<MainLayout />}>
+                        <Route path='/' element={<Home />} />
+                  </Route>
                   <Route element={<AuthRoute />}>
-                        <Route element={<MainLayout />}>
-                              <Route path='/' element={<Home />} />
-                        </Route>
                         <Route path='/:id' element={<BlogDetail />} />
-                        <Route path='/edit/:id' element={<EditBlog />}  />
+                        <Route path='/edit/:id' element={<EditBlog />} />
                   </Route>
                   <Route path='/register' element={<Register />} />
                   <Route path='/login' element={<Login />} />

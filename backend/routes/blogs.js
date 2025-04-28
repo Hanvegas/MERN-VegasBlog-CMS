@@ -4,7 +4,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
 
 const router = express.Router()
 
-router.get("/", authMiddleware, async (req, res) => {
+router.get("/", async (req, res) => {
       const blogs = await Blog.find().populate('user')
       res.status(201).json(blogs)
 })
