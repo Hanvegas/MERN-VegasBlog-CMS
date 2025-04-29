@@ -1,5 +1,4 @@
 import React from 'react'
-import useEditBlog from '../../hooks/blog/useEditBlog'
 
 const FormBlog = ({ title, setTitle, description, setDescription, image, setImage, handleSubmit }) => {
       return (
@@ -14,7 +13,7 @@ const FormBlog = ({ title, setTitle, description, setDescription, image, setImag
                   </div>
                   <div className='mb-12'>
                         <label htmlFor='image' className='text-2xl font-medium'>Image</label>
-                        <input type='file' id='image' onChange={(e) => setImage(e.target.value)} className='w-full py-2 px-6 mt-2 bg-gray-100 rounded-lg shadow-sm cursor-pointer' />
+                        <input type='file' name='image' id='image' onChange={(e) => setImage(e.target.files[0])} className='w-full py-2 px-6 mt-2 bg-gray-100 rounded-lg shadow-sm cursor-pointer' />
                   </div>
                   <div className='w-full flex justify-end'>
                         <button className='py-3 px-6 text-lg font-semibold text-white bg-green-600 rounded-md shadow-lg cursor-pointer'>Update</button>

@@ -1,6 +1,7 @@
 const express = require('express')
 const Blog = require('../models/blog')
 const authMiddleware = require('../middlewares/authMiddleware')
+const upload = require('../config/multer')
 
 const router = express.Router()
 
@@ -15,8 +16,10 @@ router.get('/:id', authMiddleware, async (req, res) => {
       res.status(201).json(blog)
 })
 
-router.post("/", authMiddleware, async (req, res) => {
+router.post("/", upload.single('image'), authMiddleware, async (req, res) => {
       try {
+            if (!req.file) return res.status(400).json({ msg: "Image Required" })
+            const image = `public/images/${req.file.filename}`
             const { title, description } = req.body
             const today = new Date()
             const options = { day: '2-digit', month: 'short', year: 'numeric' }
