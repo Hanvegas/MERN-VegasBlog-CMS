@@ -7,11 +7,15 @@ const useEditBlog = () => {
       const navigate = useNavigate()
       const [title, setTitle] = useState('')
       const [description, setDescription] = useState('')
-      const [image, setImage] = useState('')
+      const [image, setImage] = useState(null)
 
       const handleSubmit = (e) => {
             e.preventDefault()
-            editBlog(id, { title, description, image })
+            const formBlog = new FormData()
+            formBlog.append("title", title)
+            formBlog.append("description", description)
+            formBlog.append("image", image)
+            editBlog(id, formBlog)
             navigate(`/${id}`)
       }
 
