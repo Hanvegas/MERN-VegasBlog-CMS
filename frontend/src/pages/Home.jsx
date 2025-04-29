@@ -6,16 +6,15 @@ import BlogCard from '../components/BlogList/BlogCard'
 
 const Home = () => {
       const { blogs } = useGetBlog()
-      const images = ["../../../image/city-light.jpg", "../../image/city-light-2.jpg", '../../image/mansion.jpg']
-      const imageRandom = images[Math.floor(Math.random() * images.length)]
       return (
             <div className='w-full h-auto'>
                   <HeroSection />
                   <BlogList>
                         {blogs.map((blog) => {
+                              console.log(`${import.meta.env.VITE_BASE_URL}${blog.image}`)
                               return (
                                     <div key={blog._id}>
-                                          <BlogCard id={blog._id} image={imageRandom} date={blog.date} title={blog.title} description={blog.description} author={blog.user.profilePic} username={blog.user.username} />
+                                          <BlogCard id={blog._id} image={`${import.meta.env.VITE_BASE_URL}${blog.image}`} date={blog.date} title={blog.title} description={blog.description} author={blog.user.profilePic} username={blog.user.username} />
                                     </div>
                               )
                         })}
