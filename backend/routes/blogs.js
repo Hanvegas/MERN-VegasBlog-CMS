@@ -4,6 +4,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const upload = require('../config/multer')
 const fs = require('fs')
 const path = require('path')
+const authorMiddleware = require('../middlewares/authorMiddleware')
 
 const router = express.Router()
 
@@ -15,6 +16,7 @@ router.get("/", async (req, res) => {
 router.get('/:id', authMiddleware, async (req, res) => {
       const { id } = req.params
       const blog = await Blog.findById(id).populate('user')
+      console.log(blog)
       res.status(201).json(blog)
 })
 
@@ -39,7 +41,7 @@ router.post("/", upload.single('image'), authMiddleware, async (req, res) => {
       }
 })
 
-router.put('/:id', upload.single('image'), authMiddleware, async (req, res) => {
+router.put('/:id', upload.single('image'), authMiddleware, authorMiddleware, async (req, res) => {
       try {
             const { id } = req.params
             const { title, description } = req.body
@@ -73,7 +75,7 @@ router.put('/:id', upload.single('image'), authMiddleware, async (req, res) => {
       }
 })
 
-router.delete('/:id', authMiddleware, async (req, res) => {
+router.delete('/:id', authMiddleware, authorMiddleware, async (req, res) => {
       try {
             const { id } = req.params
             const blog = await Blog.findById(id)
@@ -85,6 +87,5 @@ router.delete('/:id', authMiddleware, async (req, res) => {
             res.status(401).json({ msg: "Deleted Data Failed" })
       }
 })
-
 
 module.exports = router
