@@ -16,7 +16,6 @@ router.get("/", async (req, res) => {
 router.get('/:id', authMiddleware, async (req, res) => {
       const { id } = req.params
       const blog = await Blog.findById(id).populate('user')
-      console.log(blog)
       res.status(201).json(blog)
 })
 
