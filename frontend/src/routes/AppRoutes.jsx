@@ -8,6 +8,7 @@ import AuthRoute from './AuthRoute'
 import BlogDetail from '../pages/blog/BlogDetail'
 import EditBlog from '../pages/blog/EditBlog'
 import CreateBlog from '../pages/blog/CreateBlog'
+import BackLayout from '../layouts/BackLayout'
 
 const AppRoutes = () => {
       return (
@@ -16,9 +17,11 @@ const AppRoutes = () => {
                         <Route path='/' element={<Home />} />
                   </Route>
                   <Route element={<AuthRoute />}>
-                        <Route path='/:id' element={<BlogDetail />} />
-                        <Route path='/edit/:id' element={<EditBlog />} />
-                        <Route path='/create' element={<CreateBlog />} />
+                        <Route element={<BackLayout />}>
+                              <Route path='/:id' element={<BlogDetail />} />
+                              <Route path='/edit/:id' element={<EditBlog />} />
+                              <Route path='/create' element={<CreateBlog />} />
+                        </Route>
                   </Route>
                   <Route path='/register' element={<Register />} />
                   <Route path='/login' element={<Login />} />
