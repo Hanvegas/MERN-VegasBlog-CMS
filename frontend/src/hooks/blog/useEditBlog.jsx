@@ -16,7 +16,7 @@ const useEditBlog = () => {
             formBlog.append("description", description)
             formBlog.append("image", image)
             editBlog(id, formBlog)
-            navigate(`/${id}`)
+            navigate(`/blog/${id}`)
       }
 
       useEffect(() => {

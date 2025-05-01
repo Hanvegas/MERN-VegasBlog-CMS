@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 
 const BlogCard = ({ id, image, date, title, description, author, username }) => {
       return (
-            <Link to={`/${id}`} className='flex flex-col'>
+            <Link to={`/blog/${id}`} className='flex flex-col'>
                   <div className='w-full h-72 '>
                         <img src={image} alt={title} className='w-full h-full object-cover rounded-xl' />
                   </div>

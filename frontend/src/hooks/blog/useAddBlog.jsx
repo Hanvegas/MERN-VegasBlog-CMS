@@ -15,7 +15,7 @@ const useAddBlog = () => {
             formBlog.append("description", description)
             formBlog.append('image', image)
             await postBlog(formBlog)
-            navigate("/")
+            navigate("/blog")
       }
 
       return { title, setTitle, description, setDescription, image, setImage, handleNewBlog }

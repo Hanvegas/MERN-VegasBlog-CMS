@@ -25,7 +25,7 @@ const useFormInputAuth = () => {
                   e.preventDefault()
                   await login({ username, password })
                   setIsLoggedIn(true)
-                  navigate('/')
+                  navigate('/blog')
             } catch (error) {
                   setIsLoggedIn(false)
                   navigate('/login')
