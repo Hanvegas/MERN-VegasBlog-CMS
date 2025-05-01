@@ -4,27 +4,21 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
-const user = require('../models/user')
 
 const router = express.Router()
 
 router.post('/register', wrapAsync(async (req, res) => {
-      try {
-            const { username, email, password } = req.body
-            if (!username || !email || !password) return res.status(401).json({ mgs: "Please input field" })
-            const characterName = ["KingSton", "Avery", "Destiny", "Eliza", "Andrea", "Jude", "Liam", "Mason", "Sophia"]
-            const randomCharacter = characterName[Math.floor(Math.random() * characterName.length)]
-            const profilePic = `https://api.dicebear.com/9.x/adventurer/svg?seed=${randomCharacter}`
-            const newUser = new User({ username, email, password, profilePic })
-            await newUser.save()
-            res.status(201).json({ msg: "Registed Successfully" })
-      } catch (error) {
-            res.status(401).json({ msg: "Registed Failed" })
-      }
+      const { username, email, password } = req.body
+      if (!username || !email || !password) return res.status(401).json({ mgs: "Please input field" })
+      const characterName = ["KingSton", "Avery", "Destiny", "Eliza", "Andrea", "Jude", "Liam", "Mason", "Sophia"]
+      const randomCharacter = characterName[Math.floor(Math.random() * characterName.length)]
+      const profilePic = `https://api.dicebear.com/9.x/adventurer/svg?seed=${randomCharacter}`
+      const newUser = new User({ username, email, password, profilePic })
+      await newUser.save()
+      res.status(201).json({ msg: "Registed Successfully" })
 }))
 
 router.post('/login', wrapAsync(async (req, res) => {
-      try {
             const { username, password } = req.body
             const user = await User.findOne({ username })
             const isMatch = await bcrypt.compare(password, user.password)
@@ -37,9 +31,6 @@ router.post('/login', wrapAsync(async (req, res) => {
                   maxAge: 1000 * 60 * 60 * 24
             })
             res.status(201).json({ msg: "Login Successfully" })
-      } catch {
-            res.status(401).json({ msg: "Logged in Failed" })
-      }
 }))
 
 router.get('/check-auth', (req, res) => {
@@ -58,7 +49,7 @@ router.post('/logout', (req, res) => {
             res.clearCookie('token', { httpOnly: true, secure: false, sameSite: "strict" })
             res.status(201).json({ msg: "Logout Successfully" })
       } catch (error) {
-            res.status(401).json({ msg: "Logout Failed"})
+            res.status(401).json({ msg: "Logout Failed" })
       }
 })
 
