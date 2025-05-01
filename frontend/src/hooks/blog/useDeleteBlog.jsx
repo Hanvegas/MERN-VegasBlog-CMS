@@ -8,7 +8,7 @@ const useDeleteBlog = () => {
 
       const handleDelete = async () => {
             await deleteBlog(id)
-            navigate('/')
+            navigate('/blog')
       }
 
       return { handleDelete }

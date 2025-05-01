@@ -9,7 +9,7 @@ const Navbar = () => {
       return (
             <nav className='absolute flex justify-between items-center w-full py-8 px-12 bg-transparent z-20'>
                   <div>
-                        <a href='/' className='text-2xl font-bold'>
+                        <a href='/blog' className='text-2xl font-bold'>
                               <span className='text-red-600'>Vegas</span>
                               <span className='text-white'>Blog</span>
                         </a>
