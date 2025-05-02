@@ -9,7 +9,7 @@ const Navbar = () => {
       return (
             <nav className='absolute flex justify-between items-center w-full py-8 px-12 bg-transparent z-20'>
                   <div>
-                        <a href='/blog' className='text-2xl font-bold'>
+                        <a href='/blog' className='text-3xl font-bold'>
                               <span className='text-red-600'>Vegas</span>
                               <span className='text-white'>Blog</span>
                         </a>
@@ -22,13 +22,13 @@ const Navbar = () => {
                         {isLoggedIn
                               ?
                               <>
-                                    <Link to={"/create"} className='py-2 px-6 font-semibold text-white border-2 mr-4 rounded-md'>Add New Blog</Link>
-                                    <button onClick={handleLogout} className='py-2 px-6 font-semibold text-black bg-white rounded-md cursor-pointer'>Log Out</button>
+                                    {/* <Link to={"/create"} className='py-2 px-6 font-semibold text-white border-2 mr-4 rounded-md hover:bg-white hover:text-black hover:border-white transition-all duration-200'>Add New Blog</Link> */}
+                                    <button onClick={handleLogout} className='py-2 px-6 font-semibold text-black bg-white border-2 border-white rounded-md cursor-pointer hover:bg-transparent hover:border-2 hover:border-white hover:text-white transition-all duration-100'>Log Out</button>
                               </>
                               :
                               <>
-                                    <Link to={'/register'} className='py-2 px-6 font-semibold text-white'>Sign Up</Link>
-                                    <Link to={'/login'} className='py-2 px-6 font-semibold text-black bg-white rounded-md'>Log In</Link>
+                                    <Link to={'/register'} className='py-2 px-6 font-semibold text-white border-2 border-transparent hover:border-2 hover:border-white rounded-md mr-4 transition-all duration-100'>Sign Up</Link>
+                                    <Link to={'/login'} className='py-2 px-6 font-semibold text-black bg-white border-2 border-white rounded-md hover:bg-transparent hover:text-white hover:border-2 duration-100 '>Log In</Link>
                               </>
                         }
                   </div>
