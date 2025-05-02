@@ -12,7 +12,7 @@ const MainLayout = () => {
                   <main className='relative p-3 '>
                         <Outlet />
                   </main>
-                  <footer className='p-3 mt-10'>
+                  <footer className='mt-10'>
                         <Footer />
                   </footer>
             </div>
