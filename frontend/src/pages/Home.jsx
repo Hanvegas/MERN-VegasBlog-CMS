@@ -1,16 +1,16 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import HeroSection from '../components/HeroSection'
 import BlogList from '../components/BlogList'
-import useGetBlog from '../hooks/blog/useGetBlog'
 import BlogCard from '../components/BlogList/BlogCard'
+import { SearchBlogContext } from '../context/searchBlog'
 
 const Home = () => {
-      const { blogs } = useGetBlog()
+      const { filteredBlog } = useContext(SearchBlogContext)
       return (
             <div className='w-full h-auto'>
                   <HeroSection />
                   <BlogList>
-                        {blogs.map((blog) => {
+                        {filteredBlog.map((blog) => {
                               return (
                                     <div key={blog._id}>
                                           <BlogCard id={blog._id} image={`${import.meta.env.VITE_BASE_URL}${blog.image}`} date={blog.date} title={blog.title} description={blog.description} author={blog.user.profilePic} username={blog.user.username} />
