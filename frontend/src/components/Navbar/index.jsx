@@ -17,7 +17,7 @@ const Navbar = () => {
                         </a>
                   </div>
                   <div className='relative hover:scale-105 transition-all duration-300'>
-                        <input type='text' placeholder='Search Blog...' onChange={(e) => setInput(e.target.value)} className='py-2 px-6 w-sm font-semibold bg-white rounded-md border-2 border-black/70' />
+                        <input type='text' placeholder='Search Blog...' onChange={(e) => setInput(e.target.value)} className='py-2 px-6 w-sm font-semibold bg-white rounded-md shadow-lg' />
                         <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="#000000" className='absolute top-1.5 right-5' viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
                   </div>
                   <div>
