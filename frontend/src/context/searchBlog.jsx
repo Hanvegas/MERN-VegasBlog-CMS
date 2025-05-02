@@ -6,6 +6,8 @@ export const SearchBlogContext = createContext()
 export const SearchBlogProvider = ({ children }) => {
       const [blogs, setBlogs] = useState([])
       const [input, setInput] = useState('')
+      const [trigger, setTrigger] = useState('')
+      console.log(trigger)
 
       const filteredBlog = blogs.filter((blog) => blog.title.toLowerCase().includes(input.toLowerCase()))
 
@@ -15,10 +17,10 @@ export const SearchBlogProvider = ({ children }) => {
                   setBlogs(res.data)
             }
             getBlogData()
-      }, [])
+      }, [trigger])
 
       return (
-            <SearchBlogContext.Provider value={{ filteredBlog, setInput }}>
+            <SearchBlogContext.Provider value={{ filteredBlog, setInput, setTrigger }}>
                   {children}
             </SearchBlogContext.Provider>
       )
