@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { editBlog, getBlogById } from '../../services/blog'
 import { useNavigate, useParams } from 'react-router-dom'
+import { SearchBlogContext } from '../../context/searchBlog'
 
 const useEditBlog = () => {
+      const {setTrigger} = useContext(SearchBlogContext)
       const { id } = useParams()
       const navigate = useNavigate()
       const [title, setTitle] = useState('')
@@ -16,6 +18,7 @@ const useEditBlog = () => {
             formBlog.append("description", description)
             formBlog.append("image", image)
             editBlog(id, formBlog)
+            setTrigger(Math.floor(Math.random() * 1000))
             navigate(`/blog/${id}`)
       }
 
