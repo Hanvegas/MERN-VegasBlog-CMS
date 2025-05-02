@@ -9,9 +9,9 @@ const Article = ({ id, title, description, image, profilePic, username }) => {
       const { handleDelete } = useDeleteBlog()
       return (
             <div className='w-full'>
-                  <h1 className='w-full text-6xl font-semibold leading-20 mb-14'>{title}</h1>
+                  <h1 className='w-full text-6xl font-semibold leading-20 mb-12'>{title}</h1>
                   <div className='flex items-center mb-10'>
-                        <img src={profilePic} alt="Profile Picture" className='w-[85px] mr-1' />
+                        <img src={profilePic} alt="Profile Picture" className='w-[75px] mr-3' />
                         <p className='text-2xl font-semibold'>{username}</p>
                   </div>
                   <div className='w-full h-[500px] mb-22 shadow-2xl'>
