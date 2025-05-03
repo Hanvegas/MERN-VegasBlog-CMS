@@ -10,6 +10,7 @@ const router = express.Router()
 router.post('/register', wrapAsync(async (req, res) => {
       const { username, email, password } = req.body
       if (!username || !email || !password) return res.status(401).json({ mgs: "Please input field" })
+      // if (!email.indcludes("@")) return res.status(400).json({ msg: "Please input correct email" })
       const characterName = ["KingSton", "Avery", "Destiny", "Eliza", "Andrea", "Jude", "Liam", "Mason", "Sophia"]
       const randomCharacter = characterName[Math.floor(Math.random() * characterName.length)]
       const profilePic = `https://api.dicebear.com/9.x/adventurer/svg?seed=${randomCharacter}`
