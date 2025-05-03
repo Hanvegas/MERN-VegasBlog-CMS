@@ -7,7 +7,6 @@ export const SearchBlogProvider = ({ children }) => {
       const [blogs, setBlogs] = useState([])
       const [input, setInput] = useState('')
       const [trigger, setTrigger] = useState('')
-      console.log(trigger)
 
       const filteredBlog = blogs.filter((blog) => blog.title.toLowerCase().includes(input.toLowerCase()))
 
