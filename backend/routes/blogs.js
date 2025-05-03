@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const authorMiddleware = require('../middlewares/authorMiddleware')
 const wrapAsync = require('../utils/wrapAsync')
+const { validateBlog } = require('../middlewares/validators')
 
 const router = express.Router()
 
@@ -20,7 +21,7 @@ router.get('/:id', authMiddleware, wrapAsync(async (req, res) => {
       res.status(201).json(blog)
 }))
 
-router.post("/", upload.single('image'), authMiddleware, wrapAsync(async (req, res) => {
+router.post("/", upload.single('image'), authMiddleware, validateBlog, wrapAsync(async (req, res) => {
       if (!req.file) return res.status(400).json({ msg: "Image Required" })
       const image = `/images/${req.file.filename}`
       const { title, description } = req.body
@@ -37,7 +38,7 @@ router.post("/", upload.single('image'), authMiddleware, wrapAsync(async (req, r
       res.status(201).json({ msg: "Data Posted", blog })
 }))
 
-router.put('/:id', upload.single('image'), authMiddleware, authorMiddleware, wrapAsync(async (req, res) => {
+router.put('/:id', upload.single('image'), authMiddleware, authorMiddleware, validateBlog, wrapAsync(async (req, res) => {
       const { id } = req.params
       const { title, description } = req.body
 
