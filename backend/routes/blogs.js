@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const authorMiddleware = require('../middlewares/authorMiddleware')
 const wrapAsync = require('../utils/wrapAsync')
+const { validateBlog } = require('../middlewares/validator')
 
 const router = express.Router()
 
@@ -20,11 +21,10 @@ router.get('/:id', authMiddleware, wrapAsync(async (req, res) => {
       res.status(201).json(blog)
 }))
 
-router.post("/", upload.single('image'), authMiddleware, wrapAsync(async (req, res) => {
+router.post("/", upload.single('image'), authMiddleware, validateBlog, wrapAsync(async (req, res) => {
       if (!req.file) return res.status(400).json({ msg: "Image Required" })
       const image = `/images/${req.file.filename}`
       const { title, description } = req.body
-      if (!title || !description) return res.status(400).json({ msg: "Please input Title and description" })
 
       // Formated Date
       const today = new Date()
@@ -47,10 +47,12 @@ router.put('/:id', upload.single('image'), authMiddleware, authorMiddleware, wra
       const options = { day: '2-digit', month: 'short', year: 'numeric' }
       const formatted = today.toLocaleDateString('en-GB', options)
       const editedDate = `${formatted} Edited`
-      const blog = await Blog.findById(id)
 
+      let updatedData
+      
       const image = req.file
       if (image) {
+            const blog = await Blog.findById(id)
 
             // Delete Image Before
             const imagePath = path.join(__dirname, "../public", blog.image)
@@ -58,14 +60,16 @@ router.put('/:id', upload.single('image'), authMiddleware, authorMiddleware, wra
 
             // Update Blog
             const imageUrl = `/images/${req.file.filename}`
-            await Blog.findByIdAndUpdate(id, { title, description, date: editedDate, image: imageUrl }, { new: true })
+            updatedData = await Blog.findByIdAndUpdate(id, { title, description, date: editedDate, image: imageUrl }, { new: true })
             await blog.save()
       } else {
-            await Blog.findByIdAndUpdate(id, { title, description, date: editedDate }, { new: true })
+            const blog = await Blog.findById(id)
+
+            updatedData = await Blog.findByIdAndUpdate(id, { title, description, date: editedDate }, { new: true })
             await blog.save()
       }
 
-      res.status(201).json({ msg: "Data Updated", blog })
+      res.status(201).json({ msg: "Data Updated", updatedData })
 }))
 
 router.delete('/:id', authMiddleware, authorMiddleware, wrapAsync(async (req, res) => {
