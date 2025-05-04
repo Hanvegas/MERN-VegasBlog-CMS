@@ -4,13 +4,13 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 const User = require('../models/user')
+const { validateLogin, validateRegister } = require('../middlewares/validator')
 
 const router = express.Router()
 
-router.post('/register', wrapAsync(async (req, res) => {
+router.post('/register', validateRegister, wrapAsync(async (req, res) => {
       const { username, email, password } = req.body
-      if (!username || !email || !password) return res.status(401).json({ mgs: "Please input field" })
-      // if (!email.indcludes("@")) return res.status(400).json({ msg: "Please input correct email" })
+
       const characterName = ["KingSton", "Avery", "Destiny", "Eliza", "Andrea", "Jude", "Liam", "Mason", "Sophia"]
       const randomCharacter = characterName[Math.floor(Math.random() * characterName.length)]
       const profilePic = `https://api.dicebear.com/9.x/adventurer/svg?seed=${randomCharacter}`
@@ -19,9 +19,10 @@ router.post('/register', wrapAsync(async (req, res) => {
       res.status(201).json({ msg: "Registed Successfully" })
 }))
 
-router.post('/login', wrapAsync(async (req, res) => {
+router.post('/login', validateLogin, wrapAsync(async (req, res) => {
             const { username, password } = req.body
             const user = await User.findOne({ username })
+            if(!user) return res.status(404).json({ msg: "Invalid Credentials" })
             const isMatch = await bcrypt.compare(password, user.password)
             if (!isMatch) return res.status(401).json({ msg: "Username or Password Wrong" })
             const token = jwt.sign({ id: user.id, username: user.username, profilePic: user.profilePic }, process.env.JWT_SECRET, { expiresIn: "1d" })
