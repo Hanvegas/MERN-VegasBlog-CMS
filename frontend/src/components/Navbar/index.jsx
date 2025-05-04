@@ -11,7 +11,7 @@ const Navbar = () => {
       return (
             <nav className='sticky top-6 flex justify-between items-center w-full py-6 px-12 bg-white/30 backdrop-blur-md rounded-full z-20'>
                   <div>
-                        <a href='/blog' className='text-3xl font-bold'>
+                        <a href='/' className='text-3xl font-bold'>
                               <span className='text-red-600'>Vegas</span>
                               <span className='text-black'>Blog</span>
                         </a>

@@ -11,7 +11,7 @@ const useDeleteBlog = () => {
       const handleDelete = async () => {
             await deleteBlog(id)
             setTrigger(Math.floor(Math.random() * 1000))
-            navigate('/blog')
+            navigate('/')
       }
 
       return { handleDelete }

@@ -18,7 +18,7 @@ const useAddBlog = () => {
             formBlog.append('image', image)
             await postBlog(formBlog)
             setTrigger(Math.floor(Math.random() * 1000))
-            navigate("/blog")
+            navigate("/")
       }
 
       return { title, setTitle, description, setDescription, image, setImage, handleNewBlog }
