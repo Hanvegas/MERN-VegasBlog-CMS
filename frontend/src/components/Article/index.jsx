@@ -17,7 +17,7 @@ const Article = ({ id, title, description, image, profilePic, username }) => {
                   <div className='w-full h-[500px] mb-22 shadow-2xl'>
                         <img src={image} alt={title} className=' w-full h-full rounded-xl object-cover' />
                   </div>
-                  <div className='px-12 mb-20 text-xl font-medium leading-12 text-justify'>
+                  <div className='px-12 mb-20 text-xl font-medium leading-14 text-justify'>
                         <p>{description}</p>
                   </div>
                   {
