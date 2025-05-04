@@ -24,6 +24,7 @@ router.post("/", upload.single('image'), authMiddleware, wrapAsync(async (req, r
       if (!req.file) return res.status(400).json({ msg: "Image Required" })
       const image = `/images/${req.file.filename}`
       const { title, description } = req.body
+      if (!title || !description) return res.status(400).json({ msg: "Please input Title and description" })
 
       // Formated Date
       const today = new Date()
