@@ -6,6 +6,7 @@ const fs = require('fs')
 const path = require('path')
 const authorMiddleware = require('../middlewares/authorMiddleware')
 const wrapAsync = require('../utils/wrapAsync')
+const { validateBlog } = require('../middlewares/validator')
 
 const router = express.Router()
 
@@ -20,11 +21,11 @@ router.get('/:id', authMiddleware, wrapAsync(async (req, res) => {
       res.status(201).json(blog)
 }))
 
-router.post("/", upload.single('image'), authMiddleware, wrapAsync(async (req, res) => {
+router.post("/", upload.single('image'), authMiddleware, validateBlog, wrapAsync(async (req, res) => {
       if (!req.file) return res.status(400).json({ msg: "Image Required" })
       const image = `/images/${req.file.filename}`
       const { title, description } = req.body
-      if (!title || !description) return res.status(400).json({ msg: "Please input Title and description" })
+      // if (!title || !description) return res.status(400).json({ msg: "Please input Title and description" })
 
       // Formated Date
       const today = new Date()
